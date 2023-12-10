@@ -1,0 +1,11 @@
+{
+  "name": "advent-of-code",
+  "description": "an attempt to get back into the hobby of coding.",
+  "dependencies": {
+    "tsc": "^2.0.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.4",
+    "fs": "^0.0.1-security"
+  }
+}
