@@ -1,29 +1,35 @@
 import * as fs from "fs";
 
-const fileContent = fs.readFileSync("input_2.txt", "utf-8");
+const fileContent = fs.readFileSync("input.txt", "utf-8");
 const lines = fileContent.trim().split("\n");
 
-const cubesTotal = {
-  red: 12,
-  green: 13,
-  blue: 14,
-};
+interface Game {
+  blue: number[];
+  green: number[];
+  red: number[];
+}
 
-const handleNumberOfCubes = (line: string): boolean => {
+const handleNumberOfCubes = (line: string): number => {
+  const game: Game = { blue: [], green: [], red: [] };
   for (const element of line.split(": ")[1].split("; ")) {
     for (const color of element.split(", ")) {
       const item = color.split(" ");
       const quantity = parseInt(item[0]);
       const hue = item[1];
-
-      if (quantity > cubesTotal[hue]) return false;
+      game[hue].push(quantity);
     }
   }
-  return true;
+  const gameValues = Object.values(game);
+  gameValues.forEach((element) => {
+    element.sort((a: number, b: number) => b - a);
+  });
+
+  return gameValues
+    .map((value) => value[0])
+    .reduce((acc, curr) => acc * curr, 1);
 };
 
 const answer = lines
-  .filter((line) => handleNumberOfCubes(line))
-  .map((line) => parseInt(line.split(": ")[0].split(" ")[1]))
+  .map((line) => handleNumberOfCubes(line))
   .reduce((acc, curr) => acc + curr, 0);
 console.log(answer);
