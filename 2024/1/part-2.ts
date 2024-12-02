@@ -1,14 +1,8 @@
 import {createFrequencyDict, parseInput} from "../index";
+import {getLists} from "./day-utils";
 
 const lines = parseInput("input.txt");
-const firstList: number[] = [];
-const secondList: number[] = [];
-
-lines.forEach(line => {
-    const [a, b] = line.split(' ').filter(str => !!str.length).map(str => parseInt(str));
-    firstList.push(a);
-    secondList.push(b);
-});
+const [firstList, secondList] = getLists(lines);
 
 console.assert(firstList.length === secondList.length, 'Lists should be of equal length');
 
