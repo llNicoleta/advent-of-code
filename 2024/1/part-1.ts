@@ -1,7 +1,6 @@
-import * as fs from "fs";
+import {parseInput} from "../index";
 
-const fileContent: string = fs.readFileSync("input.txt", "utf-8");
-const lines: string[] = fileContent.trimEnd().split("\n");
+const lines = parseInput("input.txt")
 
 const firstList: number[] = [];
 const secondList: number[] = [];
